@@ -34,7 +34,6 @@ MealDetailsScreen.navigationOptions = navigationData => {
                     title='Fav' 
                     iconName='ios-star' 
                     onPress = {() => {
-                        console.log('it worked');
                     }}
                 />
             </HeaderButtons>
