@@ -1,10 +1,25 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {
+    View, 
+    Text, 
+    StyleSheet, 
+    Button, 
+    ScrollView,
+    Image
+} from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '../components/HeaderButton';
 
 import{MEALS} from '../data/dummy-data';
+
+const Listitem = props => {
+    return (
+        <View style = {styles.Listitem}>
+            <Text>{props.children}</Text>
+        </View>
+    )
+}
 
 const MealDetailsScreen = props => {
 
@@ -13,10 +28,22 @@ const MealDetailsScreen = props => {
     const selectedMeal = MEALS.find(meal => meal.id === mealId);
 
     return(
-        <View style ={styles.screen}>
-            <Text>Meal Details Screen</Text>
-            <Text>{selectedMeal.title}</Text>
+        <ScrollView>
+        <Image source={{uri: selectedMeal.imageUrl}} style={styles.image}/>
+        <View style = {styles.details}>
+                        <Text>{selectedMeal.duration}m</Text>
+                        <Text>{selectedMeal.complexity.toUpperCase()}</Text>
+                        <Text>{selectedMeal.affordability.toUpperCase()}</Text>
         </View>
+        <Text style={styles.textTitle}>Ingredients</Text>
+         {selectedMeal.ingredients.map(ingredient => (
+            <Listitem key={ingredient}>{ingredient}</Listitem>
+         ))}
+        <Text style= {styles.textTitle}>Steps</Text>
+        {selectedMeal.steps.map(step => (
+            <Listitem key={step}>{step}</Listitem>
+         ))}
+        </ScrollView>
     );
 }
 
@@ -42,11 +69,26 @@ MealDetailsScreen.navigationOptions = navigationData => {
 };
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        
+    image:{
+        width:'100%',
+        height: 200 
+    },
+    details: {
+        flexDirection: 'row',
+        padding: 15,
+        justifyContent: 'space-around',
+    },
+    textTitle: {
+        fontFamily:'open-sans-bold',
+        fontSize: 22,
+        textAlign: 'center'
+    },
+    Listitem :{
+        marginVertical: 10,
+        marginHorizontal: 20,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        padding: 10
     }
 });
 

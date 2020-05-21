@@ -18,6 +18,12 @@ const defaultStackNavOptions = {
     headerStyle: {
         backgroundColor: Platform.OS ==='android' ? Colors.primaryColor : 'white',
     },
+    headerTitleStyle: {
+        fontFamily: 'open-sans'
+    },
+    headerBackTitleStyle: {
+        fontFamily: 'open-sans'
+    },
     headerTintColor: Platform.OS ==='android' ? 'white' : 'black',
     headerBackTitle: 'Back'
 };
@@ -72,6 +78,9 @@ const MealsFavTabNavigator = Platform.OS === 'android'
     {
     tabBarOptions:{
         activeTintColor: 'black',
+        labelStyle:{
+            fontFamily: 'open-sans'
+        },
         activeBackgroundColor: 'rgba(245,66,141,0.5)'
     }
 });
